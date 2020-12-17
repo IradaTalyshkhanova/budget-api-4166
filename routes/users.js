@@ -4,7 +4,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.post('/register', function(req, res, next) {
-  try {
+
   // create the budget entry
   var con = mysql.createConnection({
     host: "sql9.freemysqlhosting.net",
@@ -15,20 +15,19 @@ router.post('/register', function(req, res, next) {
   
   con.connect(function(err) {
     if (err) throw err;
-    console.log("Connected!");
-    console.log(req)
+    if (req.query!=null) {
     var sql = "INSERT IGNORE INTO budget (email, income, housing, utilities, transportation, insurance, other, lastupdated) " + 
                 "VALUES ('" + req.query.email  + "', 0, 0, 0, 0, 0, 0, NULL);";
     con.query(sql, function (err, result) {
       if (err) throw err;
       console.log("1 record inserted");
     });
+  }
   });
-} catch {}
 });
 
 router.get('/login', function(req, res, next) {
-  try {
+
   // create the budget entry
   var con = mysql.createConnection({
     host: "sql9.freemysqlhosting.net",
@@ -39,20 +38,19 @@ router.get('/login', function(req, res, next) {
   
   con.connect(function(err) {
     if (err) throw err;
-    console.log("Connected!");
-    console.log(req)
-    var sql = 'SELECT id FROM budget where email = "' + req.query.email + '";';
-    con.query(sql, function (err, result) {
-      if (err) throw err;
-      console.log("got id");
-      results = result.map(v => Object.assign({}, v));
-      con.end(function(err) {
-        console.log('connection ended');
-        res.send(results[0].id);
+    if (req.query!=null) {
+      var sql = 'SELECT id FROM budget where email = "' + req.query.email + '";';
+      con.query(sql, function (err, result) {
+        if (err) throw err;
+        console.log("got id");
+        results = result.map(v => Object.assign({}, v));
+        con.end(function(err) {
+          console.log('connection ended');
+          res.send(results[0].id);
+        });
       });
-    });
+    }
   });
-} catch {}
 });
 
 module.exports = router;
