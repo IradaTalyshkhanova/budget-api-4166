@@ -16,7 +16,7 @@ router.post('/register', function(req, res, next) {
     if (err) throw err;
     console.log("Connected!");
     console.log(req)
-    var sql = "INSERT INTO budget (email, income, housing, utilities, transportation, insurance, other, lastupdated) " + 
+    var sql = "INSERT IGNORE INTO budget (email, income, housing, utilities, transportation, insurance, other, lastupdated) " + 
                 "VALUES ('" + req.query.email  + "', 0, 0, 0, 0, 0, 0, NULL);";
     con.query(sql, function (err, result) {
       if (err) throw err;
