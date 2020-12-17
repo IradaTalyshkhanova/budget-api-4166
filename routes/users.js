@@ -4,6 +4,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.post('/register', function(req, res, next) {
+  try {
   // create the budget entry
   var con = mysql.createConnection({
     host: "sql9.freemysqlhosting.net",
@@ -23,9 +24,11 @@ router.post('/register', function(req, res, next) {
       console.log("1 record inserted");
     });
   });
+} catch {}
 });
 
 router.get('/login', function(req, res, next) {
+  try {
   // create the budget entry
   var con = mysql.createConnection({
     host: "sql9.freemysqlhosting.net",
@@ -49,6 +52,7 @@ router.get('/login', function(req, res, next) {
       });
     });
   });
+} catch {}
 });
 
 module.exports = router;
