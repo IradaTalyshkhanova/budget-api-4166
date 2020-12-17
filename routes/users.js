@@ -45,7 +45,7 @@ router.get('/login', function(req, res, next) {
       results = result.map(v => Object.assign({}, v));
       con.end(function(err) {
         console.log('connection ended');
-        res.send(JSON.stringify(results[0]));
+        res.send(results[0].id);
       });
     });
   });
