@@ -17,7 +17,7 @@ router.post('/register', function(req, res, next) {
     console.log("Connected!");
     console.log(req)
     var sql = "INSERT INTO budget (email, income, housing, utilities, transportation, insurance, other, lastupdated) " + 
-                "VALUES ('" + req.body.form.email.value  + "', 0, 0, 0, 0, 0, 0, NULL);";
+                "VALUES ('" + req.query.email  + "', 0, 0, 0, 0, 0, 0, NULL);";
     con.query(sql, function (err, result) {
       if (err) throw err;
       console.log("1 record inserted");
