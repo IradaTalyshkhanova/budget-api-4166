@@ -13,7 +13,7 @@ router.get('/get', function(req, res, next) {
     con.connect(function(err) {
         if (err) throw err;
         console.log("GETTTTTYTT")
-        con.query("SELECT * FROM budget WHERE id = '" + req.query.id + "';", function (err, result, fields) {
+        con.query("SELECT * FROM budget WHERE email = '" + req.query.email + "';", function (err, result, fields) {
             if (err) throw err;
             console.log(result);
             results = result.map(v => Object.assign({}, v));
