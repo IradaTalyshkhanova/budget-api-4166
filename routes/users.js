@@ -15,7 +15,7 @@ router.post('/register', function(req, res, next) {
   
   con.connect(function(err) {
     if (err) throw err;
-    if (req.query!=null||req.query.email==="undefined") {
+    if (req.query!=null||req.query.email!=="undefined") {
     var sql = "INSERT IGNORE INTO budget (email, income, housing, utilities, transportation, insurance, other, lastupdated) " + 
                 "VALUES ('" + req.query.email  + "', 0, 0, 0, 0, 0, 0, NULL);";
     con.query(sql, function (err, result) {
@@ -38,7 +38,7 @@ router.get('/login', function(req, res, next) {
   
   con.connect(function(err) {
     if (err) throw err;
-    if (req.query!=null||req.query.email==="undefined") {
+    if (req.query!=null||req.query.email!=="undefined") {
       var sql = 'SELECT id FROM budget where email = "' + req.query.email + '";';
       con.query(sql, function (err, result) {
         if (err) throw err;
