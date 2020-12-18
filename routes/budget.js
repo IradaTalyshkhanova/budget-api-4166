@@ -12,7 +12,6 @@ router.get('/get', function(req, res, next) {
 
     con.connect(function(err) {
         if (err) throw err;
-        console.log("GETTTTTYTT")
         con.query("SELECT * FROM budget WHERE email = '" + req.query.email + "';", function (err, result, fields) {
             if (err) throw err;
             console.log(result);
@@ -44,7 +43,7 @@ router.post('/update', function(req, res, next) {
                     "other = " + req.body.orderForm.other.value + ", " + 
                     "transportation = " + req.body.orderForm.transportation.value + ", " + 
                     "utilities = " + req.body.orderForm.utilities.value + " " + 
-                    "WHERE id = '" + req.query.id+ ";'";
+                    "WHERE email = '" + req.query.email + "';";
         console.log(sql)
         con.query(sql, function (err, result) {
             if (err) throw err;
@@ -54,7 +53,6 @@ router.post('/update', function(req, res, next) {
             });
         });
     });
-    res.send('respond with a update');
 });
 
 module.exports = router;
