@@ -42,12 +42,13 @@ router.get('/login', function(req, res, next) {
       var sql = 'SELECT id FROM budget where email = "' + req.query.email + '";';
       con.query(sql, function (err, result) {
         if (err) throw err;
-        console.log("got id");
+        if (result.length !== 0) {
         results = result.map(v => Object.assign({}, v));
         con.end(function(err) {
           console.log('connection ended');
-          res.send(results[0].id);
+          res.send({id: results[0].id});
         });
+      } else {res.send({});}
       });
     }
   });
